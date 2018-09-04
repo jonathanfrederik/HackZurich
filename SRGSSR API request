@@ -1,0 +1,43 @@
+import http.client
+import base64
+
+consumerKey = "UiY7aIcfGI98MzDN65sz3RXf5n7MMDRP"
+consumerSecret = "QcKlqkAIf63ebGGr"
+
+
+tokenBytes = base64.b64encode(b"UiY7aIcfGI98MzDN65sz3RXf5n7MMDRP:QcKlqkAIf63ebGGr")
+tokenString = str(tokenBytes)
+
+tokenString = tokenString[2:-1]
+print(tokenString)
+
+
+##conn = http.client.HTTPSConnection("https://srgssr-prod.apigee.net")
+##conn = http.client.HTTPSConnection("https://api.srgssr.ch")
+conn = http.client.HTTPSConnection("api.srgssr.ch")
+
+payload = ""
+ 
+headers = { 'Authorization': "Basic VWlZN2FJY2ZHSTk4TXpETjY1c3ozUlhmNW43TU1EUlA6UWNLbHFrQUlmNjNlYkdHcg=="}
+ 
+conn.request("POST", "/oauth/v1/accesstoken?grant_type=client_credentials", payload, headers)
+ 
+res = conn.getresponse()
+data = res.read()
+
+print(data.decode("utf-8"))
+ 
+#here read parameter access_token   data.access_token
+
+import http.client
+conn = http.client.HTTPSConnection("api.srgssr.ch")
+
+payload = ""
+headers = { 'Authorization': "Bearer telIiDQHGb2WDTO3oCo0K0gdWD2S"}
+ 
+conn.request("GET", "https://api.srgssr.ch/rsi-cms/v2/contents?term=trump", payload, headers)
+ 
+res = conn.getresponse()
+data = res.read()
+ 
+print(data.decode("utf-8"))
